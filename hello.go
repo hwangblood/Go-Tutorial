@@ -3,9 +3,6 @@ package main
 
 import (
 	"fmt"
-	"math"
-	"math/rand"
-	"time"
 )
 
 var pl = fmt.Println
@@ -144,45 +141,54 @@ func main() {
 	*/
 
 	// * Math
+	/*
+		pl("5 + 4 =", 5+4)
+		pl("5 - 4 =", 5-4)
+		pl("5 * 4 =", 5*4)
+		pl("5 / 4 =", 5/4)
+		pl("5 % 4 =", 5%4)
+		pl("10.0 / 3 =", 10.0/3)
 
-	pl("5 + 4 =", 5+4)
-	pl("5 - 4 =", 5-4)
-	pl("5 * 4 =", 5*4)
-	pl("5 / 4 =", 5/4)
-	pl("5 % 4 =", 5%4)
-	pl("10.0 / 3 =", 10.0/3)
+		// Generate a random number
 
-	// Generate a random number
+		seedSecs := time.Now().Unix()
+		rand.Seed(seedSecs)          // ! Deprecated
+		randNum := rand.Intn(50) + 1 // 1- 50
+		pl("Random:", randNum)
 
-	seedSecs := time.Now().Unix()
-	rand.Seed(seedSecs)          // ! Deprecated
-	randNum := rand.Intn(50) + 1 // 1- 50
-	pl("Random:", randNum)
+		// There are many math functions
+		pl("math.Abs(-10) =", math.Abs(-10))
+		pl("math.Pow(4, 2) ", math.Pow(4, 2))
+		pl("math.Sqrt(16) =", math.Sqrt(16))
+		pl("math.Cbrt(8) =", math.Cbrt(8))
+		pl("math.Ceil(4.4) =", math.Ceil(4.4))
+		pl("math.Floor(4.4) =", math.Floor(4.4))
+		pl("math.Round(4.4) =", math.Round(4.4))
+		pl("math.Log2(8) =", math.Log2(8))
+		pl("math.Log10(100) =", math.Log10(100))
 
-	// There are many math functions
-	pl("math.Abs(-10) =", math.Abs(-10))
-	pl("math.Pow(4, 2) ", math.Pow(4, 2))
-	pl("math.Sqrt(16) =", math.Sqrt(16))
-	pl("math.Cbrt(8) =", math.Cbrt(8))
-	pl("math.Ceil(4.4) =", math.Ceil(4.4))
-	pl("math.Floor(4.4) =", math.Floor(4.4))
-	pl("math.Round(4.4) =", math.Round(4.4))
-	pl("math.Log2(8) =", math.Log2(8))
-	pl("math.Log10(100) =", math.Log10(100))
+		// Ge the log of e to the power of 2
+		pl("math.Log(math.Exp(2)) =", math.Log(math.Exp(2)))
+		pl("math.Max(5, 4) =", math.Max(5, 4))
+		pl("math.Max(4, 5) =", math.Max(4, 5))
 
-	// Ge the log of e to the power of 2
-	pl("math.Log(math.Exp(2)) =", math.Log(math.Exp(2)))
-	pl("math.Max(5, 4) =", math.Max(5, 4))
-	pl("math.Max(4, 5) =", math.Max(4, 5))
+		// Convewrt 90 degrees to radians
+		r90 := 90 * math.Pi / 180
+		d90 := r90 * (180 / math.Pi)
+		fmt.Printf("%.2f radians = %.2f degreesn\n", r90, d90)
 
-	// Convewrt 90 degrees to radians
-	r90 := 90 * math.Pi / 180
-	d90 := r90 * (180 / math.Pi)
-	fmt.Printf("%.2f radians = %.2f degreesn\n", r90, d90)
+		pl("Sin(90) =", math.Sin(r90))
+		// There are also functions for Cos, Tan, Acos, Asin
+		// Atan, Asinh, Acosh, Atanh, Atan2, Cosh, Sinh, Sincos
+		// Htpot
+	*/
 
-	pl("Sin(90) =", math.Sin(r90))
-	// There are also functions for Cos, Tan, Acos, Asin
-	// Atan, Asinh, Acosh, Atanh, Atan2, Cosh, Sinh, Sincos
-	// Htpot
-
+	// * For Loop
+	/*
+		// for initialization; condition;
+		for x := 5; x >= 1; x-- {
+			// for x := 1; x <= 5; x++ {
+			pl(x)
+		}
+	*/
 }

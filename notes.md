@@ -205,3 +205,17 @@ Sin(90) = 1
 There are also functions for Cos, Tan, Acos, Asin,
 Atan, Asinh, Acosh, Atanh, Atan2, Cosh, Sinh, Sincos,
 Htpot
+
+# For Loop
+
+```go
+	for x := 5; x >= 1; x-- {
+		// for x := 1; x <= 5; x++ {
+		pl(x)
+	}
+
+	for x := 1; x <= 5; x++ {
+		pl(x)
+	}
+```
+
