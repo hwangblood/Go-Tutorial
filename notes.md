@@ -219,3 +219,20 @@ Htpot
 	}
 ```
 
+# While Loop
+
+```go
+fx := 0
+for fx < 5 {
+	pl(fx)
+	fx++
+}
+
+n := 1
+for true {
+	n++
+	if n > 10 {
+		break
+	}
+}
+```
