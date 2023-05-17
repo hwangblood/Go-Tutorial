@@ -236,3 +236,80 @@ for true {
 	}
 }
 ```
+
+# Range
+
+```go
+aNums := []int{1, 2, 3, 4, 5, 6}
+for _, num := range aNums {
+	pl(num)
+}
+```
+
+# Slices
+
+# Functions
+
+# Return Multiple
+
+# Function Errors
+
+# Varadic Functions
+
+# Passing Arrays
+
+# Pointers
+
+# Pass Array Pointers
+
+# File IO
+
+# Command Line
+
+# Packages / Modules
+
+# Maps
+
+# Generics
+
+# Constraints
+
+# Structs
+
+# Composition
+
+# Defined types
+
+# Associate Methods
+
+# Protecting Data
+
+# Getter / Setter
+
+# Encapsulation
+
+# Interfaces
+
+# Concurrency / GoRoutines
+
+# Sleep
+
+# Channels
+
+# Mutex / Lock
+
+# Closures
+
+# Passing Functions
+
+# Recursion
+
+# Regular Expressions
+
+# Automated Testing
+
+# Web app
+
+# Templates / HTML
+
+# Installation

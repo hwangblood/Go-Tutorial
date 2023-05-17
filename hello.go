@@ -3,13 +3,11 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"log"
-	"math/rand"
 	"os"
 	"strconv"
-	"strings"
-	"time"
 )
 
 var pl = fmt.Println
@@ -200,37 +198,307 @@ func main() {
 	*/
 
 	// * While Loop
-	fx := 0
-	for fx < 5 {
-		pl(fx)
-		fx++
-	}
+	/*
+		fx := 0
+		for fx < 5 {
+			pl(fx)
+			fx++
+		}
 
-	seedSecs := time.Now().Unix()
-	rand.Seed(seedSecs)
-	randNum := rand.Intn(10) + 1
+		seedSecs := time.Now().Unix()
+		rand.Seed(seedSecs)
+		randNum := rand.Intn(10) + 1
 
-	for true {
-		fmt.Print("Guess a number between 0 and 10 : ")
-		reader := bufio.NewReader(os.Stdin)
-		guess, err := reader.ReadString('\n')
-		if err != nil {
-			log.Fatal(err)
+		for true {
+			fmt.Print("Guess a number between 0 and 10 : ")
+			reader := bufio.NewReader(os.Stdin)
+			guess, err := reader.ReadString('\n')
+			if err != nil {
+				log.Fatal(err)
+			}
+			guess = strings.TrimSpace(guess)
+			iGuess, err := strconv.Atoi(guess)
+			if err != nil {
+				log.Fatal(err)
+			}
+			if iGuess > randNum {
+				pl("Pick a Lower Value")
+			} else if iGuess < randNum {
+				pl("Pick a Higher Value")
+			} else {
+				pl("You guessed it")
+				break
+			}
 		}
-		guess = strings.TrimSpace(guess)
-		iGuess, err := strconv.Atoi(guess)
-		if err != nil {
-			log.Fatal(err)
+		pl("Random Number is :", randNum)
+	*/
+
+	// * Range
+	/*
+		aNums := []int{1, 2, 3, 4, 5, 6}
+		for _, num := range aNums {
+			pl(num)
 		}
-		if iGuess > randNum {
-			pl("Pick a Lower Value")
-		} else if iGuess < randNum {
-			pl("Pick a Higher Value")
-		} else {
-			pl("You guessed it")
-			break
+	*/
+
+	// * Arrays
+	/*
+		var arr1 [5]int
+		arr1[0] = 1
+		arr2 := [5]int{1, 2, 3, 4, 5}
+		pl("index 0:", arr2[0])
+		pl("arr length:", len(arr2))
+		for i := 0; i < len(arr2); i++ {
+			pl(arr2[i])
 		}
+		for i, v := range arr2 {
+			fmt.Printf("index %d: %d\n", i, v)
+		}
+		arr3 := [2][2]int{
+			{1, 2},
+			{3},
+		}
+		for i := 0; i < len(arr3); i++ {
+			for j := 0; j < len(arr3[i]); j++ {
+				pl(arr3[i][j])
+			}
+		}
+		aStr1 := "abcde"
+		rArr1 := []rune(aStr1)
+		for i, r := range rArr1 {
+			fmt.Printf("Rune %d: %d\n", i, r)
+		}
+		byteArr := []byte{'a', 'b', 'c', 'd', 'e'}
+		bStr := string(byteArr[:])
+		pl("byte array is a string:", bStr)
+	*/
+	// * Slices
+	/*
+		// var name []datatype
+		sl1 := make([]string, 6)
+		sl1[0] = "Society"
+		sl1[1] = "of"
+		sl1[2] = "the"
+		sl1[3] = "Simulated"
+		sl1[4] = "Universe"
+		pl("Slice 1 length:", len(sl1))
+		for i, v := range sl1 {
+			fmt.Printf("index %d: %s\n", i, v)
+		}
+
+		sliArr := [5]int{1, 2, 3, 4, 5}
+		sl3 := sliArr[:2] // [0:2]
+		pl("sl3[:3]:", sl3[:3])
+		pl("sliArr[2:]", sliArr[2:])
+		sliArr[0] = 10
+		pl("sl3:", sl3)
+		sl3[0] = 8
+		pl("sliArr:", sliArr)
+
+		sl3 = append(sl3, 12)
+		pl("sl3:", sl3)
+
+		sl4 := make([]string, 6)
+		pl("sl4:", sl4)
+		pl("sl4[0]:", sl4[0]) // "", empty string
+	*/
+
+	pl(getSum(2, 5))
+
+	twice, pow := getTwo(5)
+	pl(twice, pow)
+
+	pl(getQuotient(5, 0))
+	pl(getQuotient(5, 4))
+
+	pl(getSum2(1, 2, 3, 4))
+	pl(getSum2(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+
+	pl("array sum", getArrSum([]int{2, 4, 6, 8, 10, 12, 14}))
+
+	num1 := 9
+	pl("num1 before func:", num1)
+	changeVarInFunc(num1)
+	pl("num1 after func:", num1)
+
+	v4 := 10
+	var p4 *int = &v4 // store pointer
+	pl("p4 address:", p4)
+	pl("p4 value:", *p4)
+	*p4 = 14
+	pl("p4 value:", *p4)
+	pl("v4 before func:", v4)
+	changeVarInFunc2(&v4)
+	pl("v4 after func:", v4)
+
+	pArr := [4]int{1, 2, 3, 4}
+	dblArrVals(&pArr)
+	pl("pArr:", pArr)
+	iSlice := []float64{11, 13, 17}
+	fmt.Printf("Average: %.3f\n", getAverage(iSlice...))
+
+	fileIO()
+	fileIO2()
+}
+
+// * Functions
+// func funcName(parameters) returnType {BODY}
+func getSum(x int, y int) int {
+	return x + y
+}
+
+// * Return Multiple
+func getTwo(x int) (int, int) {
+	return x * 2, x * x
+}
+
+// * Function Errors
+func getQuotient(x float64, y float64) (answer float64, err error) {
+	if y == 0 {
+		return 0, fmt.Errorf("You can't divide by zero")
+	} else {
+		return x / y, nil
 	}
-	pl("Random Number is :", randNum)
+}
+
+// * Varadic Functions
+// it's able to recive an unknown number of parameters
+func getSum2(nums ...int) int {
+	sum := 0
+	for _, num := range nums {
+		sum += num
+	}
+	return sum
+}
+
+// * Passing Arrays
+func getArrSum(arr []int) int {
+	sum := 0
+	for _, num := range arr {
+		sum += num
+	}
+	return sum
+}
+
+func changeVarInFunc(x int) int {
+	x += x
+	return x
+}
+
+// * Pointers
+func changeVarInFunc2(xPtr *int) {
+	*xPtr += *xPtr
+}
+
+// * Pass Array Pointers
+func dblArrVals(arr *[4]int) {
+	for i := 0; i < 4; i++ {
+		arr[i] *= 2
+	}
+}
+
+func getAverage(nums ...float64) float64 {
+	var sum float64 = 0.0
+	var numSize float64 = float64(len(nums))
+	for _, v := range nums {
+		sum += v
+	}
+	return sum / numSize
 
 }
+
+// * File IO
+func fileIO() {
+	// write file
+	f, err := os.Create("data.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	iPrimeArr := []int{2, 3, 5, 7, 11}
+	var sPrimeArr []string
+	for _, i := range iPrimeArr {
+		sPrimeArr = append(sPrimeArr, strconv.Itoa(i))
+	}
+	for _, s := range sPrimeArr {
+		_, err := f.WriteString(s + "\n")
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+	// read file
+	f, err = os.Open("data.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer f.Close()
+	scan1 := bufio.NewScanner(f)
+	for scan1.Scan() {
+		pl("Prime:", scan1.Text())
+	}
+	if err := scan1.Err(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+// Append to file
+/*
+Exactly one of O_RDONLY, O_WRONLY, or O_RDWR must be specified
+
+O_RDONLY : open the file read-only
+O_WRONLY : open the file write-only
+O_RDWR   : open the file read-write
+
+These can be or'ed
+
+O_APPEND : append data to the file when writing
+O_CREATE : create a new file if none exists
+O_EXCL   : used with O_CREATE, file must not exist
+O_SYNC   : open for synchronous I/O
+O_TRUNC  : truncate regular writable file when opened
+*/
+func fileIO2() {
+	// Check if file exists
+	_, err := os.Stat("data.txt")
+	if errors.Is(err, os.ErrNotExist) {
+		log.Fatal("File doesn't exist")
+	} else {
+		f, err := os.OpenFile("data.txt", os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer f.Close()
+		if _, err := f.WriteString("append line\n"); err != nil {
+			log.Fatal(err)
+
+		}
+	}
+
+}
+
+// * Command Line
+
+// * Packages / Modules
+// * Maps
+// * Generics
+// * Constraints
+// * Structs
+// * Composition
+// * Defined types
+// * Associate Methods
+// * Protecting Data
+// * Getter / Setter
+// * Encapsulation
+// * Interfaces
+// * Concurrency / GoRoutines
+// * Sleep
+// * Channels
+// * Mutex / Lock
+// * Closures
+// * Passing Functions
+// * Recursion
+// * Regular Expressions
+// * Automated Testing
+// * Web app
+// * Templates / HTML
+// * Installation
